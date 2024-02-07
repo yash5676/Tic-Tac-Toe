@@ -10,7 +10,7 @@ const changeTurn= ()=>{
   return turn === "X"? "0": "X"
 }
 //function to check for a win
-const checkWin = ()=>{
+const checkWin = ()=>{  
   let boxtext = document.getElementsByClassName('boxtext');
 let wins=[
   [0,1,2,5,5,0],
@@ -38,15 +38,21 @@ document.querySelector(".line").style.width ='20vw';
 
 let boxes = document.getElementsByClassName("box");
 Array.from(boxes).forEach(element =>{
+ 
 let boxtext = element.querySelector('.boxtext');
 element.addEventListener('click', ()=>{
   if(boxtext.innerText === ''){
+    music.play();
 boxtext.innerText =turn;
 turn=changeTurn();
 audioTurn.play();
 checkWin();
-if(!gameover){
+if(!isgameover){
 document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
+  }
+  else{
+    gameover.play();
+    music.pause();
   }
 }
 })
